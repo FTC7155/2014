@@ -1,0 +1,5 @@
+Programming To-Do list:
+
+1. Servo Control
+2. Putting blocks in baskets
+3. Picking up blocks (auto mode???)
