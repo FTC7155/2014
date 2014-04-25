@@ -266,13 +266,24 @@ void kindOfAllOfAutonomous() 					// program to go to the IR beacon and drop the
 
 }
 
+
+void seekLine() {
+	float cs = 0;					// find the line...
+		short nRawValues[4];
+		while(cs<5){
+			getColorSensorData(color, colorAtoD,&nRawValues[0]);
+			cs = (float)(nRawValues[0]+nRawValues[1]+nRawValues[2])/(3.0*nRawValues[3]);
+		}
+}
+
+bool onLine() { //code for being on line
+
+}
+
 task main()
 {
 
-	waitForStart(); 			//take out comment for the FCS.
-  motor[slide]=30;
-  wait1Msec(100);
-	kindOfAllOfAutonomous();
+	
 
 
 }
