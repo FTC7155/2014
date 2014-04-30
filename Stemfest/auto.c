@@ -27,27 +27,7 @@
 #include "drivers/lego-ultrasound.h"
 #include "JoystickDriver.c"								// for the waitForStart() command.
 
-const tMUXSensor irLeft = msensor_S4_3;		// configuring the IR and sonar sensor over the SMUX.
-const tMUXSensor irRight = msensor_S4_2;
-const tMUXSensor sonarLeft = msensor_S4_4;
-const tMUXSensor sonarRight = msensor_S4_1;
-
-
-task slide_up(){
-	motor[slide] = 100;
-	wait1Msec(4500); //CALIBRATE
-	motor[slide] = 0;
-}
-
-
-task slide_down(){
-	motor[slide] = -100;
-	wait1Msec(3000); //CALIBRATE
-	motor[slide] = 0;
-}
-
-
-void turn (float angle){
+void turn (float angle){ //Turn code - turning 180 when at end of line
 
 	motor[leftWheel] = -sgn(angle)*15;
 	motor[rightWheel] = sgn(angle)*15;
@@ -60,7 +40,7 @@ void turn (float angle){
 
 
 
-void seekLine() {
+void seekLine() { //Find line at beginning of code
 	float cs = 0;					// find the line...
 		short nRawValues[4];
 		while(cs<5){
@@ -70,13 +50,13 @@ void seekLine() {
 }
 
 
-task main() {
-	seekLine();
-	while(true){
-		while(SensorValue[color] == /*FIND VALUE*/ ){
-			motor[leftWheel] = 25;
+task main() { //Main task
+	seekLine();  //Look for line
+	while(true){  //Loop
+		while(SensorValue[color] == /*FIND VALUE*/ ){  //While we are on the line
+			motor[leftWheel] = 25;  //Go foward
 			motor[rightWheel] = 25;
 		}
-		turn(180);
+		turn(180); //at end of line, turn around
 	}
 }
